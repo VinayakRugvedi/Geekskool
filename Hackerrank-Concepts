@@ -1,1 +1,10 @@
 This file contains the concepts which I learnt while coding in hackerrank (JavaScript).
+
+1. In the conditional operator you can't leave the operands empty as seen in JavaScript
+    eg: (a<b) ? console.log("True") : ; //Not possible
+    and similarly, (a<b) ? : console.log("False"); //Not possible
+
+2. In order to create an array and intialize with a number or string, use the following line of code
+    : var array = new Array(len).fill(number); //For number
+    Similarly, var array = new Array(len).fill("String"); //For a String
+    where, 'len' represents the length of the array being created.
