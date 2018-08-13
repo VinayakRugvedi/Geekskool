@@ -7,4 +7,8 @@ This file contains the concepts which I learnt while coding in hackerrank (JavaS
 2. In order to create an array and intialize with a number or string, use the following line of code
     : var array = new Array(len).fill(number); //For number
     Similarly, var array = new Array(len).fill("String"); //For a String
-    where, 'len' represents the length of the array being created.
+    where, 'len' represents the length of the array being created
+
+3. In order to check whether a character is in Uppe Case or not use the following approach
+    i.e character = character.toUpperCase(); //Its like checking the original character with its upper case version
+    Similar is in the case of lowercase
