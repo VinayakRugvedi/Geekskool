@@ -12,3 +12,7 @@ This file contains the concepts which I learnt while coding in hackerrank (JavaS
 3. In order to check whether a character is in Uppe Case or not use the following approach
     i.e character = character.toUpperCase(); //Its like checking the original character with its upper case version
     Similar is in the case of lowercase
+
+4. There is a method to merge/concat two arrays, it is used as follows : array1.concat(array2) in the similar fashion
+    we can merge multiple arrays as : array1.concat(array2.concat(array3)) and so on
+    Usual way of concatenation happens
