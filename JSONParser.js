@@ -148,4 +148,4 @@ specify the path of the file in the argument below
 
 console.log(parsedResult);
 
-//https://github.com/VinayakRugvedi/Geekskool/blob/master/Parser.js
+//https://github.com/VinayakRugvedi/Geekskool/blob/master/JSONParser.js
