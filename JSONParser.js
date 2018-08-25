@@ -1,28 +1,28 @@
 //Null Parser
 const nullParser = function( data ){
-  if( data.indexOf("null") == 0 ) return ([null, data.slice(4)])
+  if( data.indexOf("null") === 0 ) return ([null, data.slice(4)])
   return null
 }
 //Boolean Parser
 const booleanParser = function( data ){
-  if( data.indexOf("true") == 0 ) return ([true, data.slice(4,data.length)]);
-  if( data.indexOf("false") == 0 )  return ([false, data.slice(5,data.length)]);
+  if( data.indexOf("true") === 0 ) return ([true, data.slice(4,data.length)]);
+  if( data.indexOf("false") === 0 )  return ([false, data.slice(5,data.length)]);
   return null;
 }
 //Number Parser
 const numberParser = function( data ){
   let result = /[-]?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?/.exec(data);
-  if ( result != null && result.index == 0) return ([Number(result[0]), data.trim().slice(result[0].length)]);
+  if ( result != null && result.index === 0) return ([Number(result[0]), data.trim().slice(result[0].length)]);
   return null;
 }
 //String Parser
 const stringParser = function( data ){
   let i = 1, internal = '', extra = 0;
-  if( data[0] == '"'){
+  if( data[0] === '"'){
       while( i < data.length ){
-    if( data[i] == '"' && data[i-1] != '\\')  return [internal, data.slice(internal.length + extra+2)];
+    if( data[i] === '"' && data[i-1] != '\\')  return [internal, data.slice(internal.length + extra+2)];
     if( data[i] != '\\' ) internal = internal.concat(data[i]);
-    else if( data[i] == '\\' ){
+    else if( data[i] === '\\' ){
       switch (data[i+1]){
         case '\\' : internal += '\\'; extra++; break;
         case '"' : internal += '\"'; extra++; break;
@@ -49,21 +49,21 @@ const stringParser = function( data ){
 const arrayParser = function( data ){
   let i = 0, intermediate =  [], result = [];
   while( data != '' ){
-  if( data[i] == '[' ){
-    if( data[i+1] == ',') return null;
-    else if( data[i+1] == ']' ) return [result, data.slice(i+2)];
+  if( data[i] === '[' ){
+    if( data[i+1] === ',') return null;
+    else if( data[i+1] === ']' ) return [result, data.slice(i+2)];
     else{
         intermediate =  parsingLegend(data.slice(i+1));
-        if( intermediate == -1 )  return null;
+        if( intermediate === -1 )  return null;
         result.push(intermediate[0]);
       }
   }
-  else if( data[i] == ',' ){
-    if( data[i+1] == ']' )  return null;
-    else if( data[i+1] == ',' ) return null;
+  else if( data[i] === ',' ){
+    if( data[i+1] === ']' )  return null;
+    else if( data[i+1] === ',' ) return null;
     else{
         intermediate =  parsingLegend(data.slice(i+1));
-        if( intermediate == -1 )  return null;
+        if( intermediate === -1 )  return null;
         result.push(intermediate[0]);
     }
   }
@@ -77,24 +77,24 @@ const arrayParser = function( data ){
 const objectParser = function( data ){
   let result = {}, name = [], value = [], i = 0;
   while( data != '' ){
-    if( data[i] == '{' ){
-      if( data[i+1] == ':' || data[i+1] == ',' )  return null;
-      if( data[i+1] == '}' )  return [result, data.slice(i+2)];
+    if( data[i] === '{' ){
+      if( data[i+1] === ':' || data[i+1] === ',' )  return null;
+      if( data[i+1] === '}' )  return [result, data.slice(i+2)];
       name =  stringParser(data.slice(i+1));
-      if( name == null || name[1][0] != ':' ) return null;
+      if( name === null || name[1][0] != ':' ) return null;
       value =  parsingLegend(name[1].slice(1));
-      if( value == -1 ) return null;
+      if( value === -1 ) return null;
       result[name[0]] = value[0];
     }
-    else if( data[i] == ',' ){
-      if( data[i+1] == ':' || data[i+1] == ',' || data[i+1] == '}' )  return null;
+    else if( data[i] === ',' ){
+      if( data[i+1] === ':' || data[i+1] === ',' || data[i+1] === '}' )  return null;
       name =  parsingLegend(data.slice(i+1));
-      if( name == null || name[1][0] != ':' ) return null;
+      if( name === null || name[1][0] != ':' ) return null;
       value =  parsingLegend(name[1].slice(1));
-      if( value == -1 ) return null;
+      if( value === -1 ) return null;
       result[name[0]] = value[0];
     }
-    else if( data[i] == '}' ) return [result, data.slice(i+1)];
+    else if( data[i] === '}' ) return [result, data.slice(i+1)];
     else return null;
     data = value[1];
   }//end of while loop
@@ -104,11 +104,11 @@ const objectParser = function( data ){
 function eliminatingSpace( data ){
   let array = data.split(""), quoteCount = 0;
   for( let i = 0; i < array.length; i++ ){
-    if( (array[i] == ' ' || array[i] == '\n' || array[i] == '\t') && quoteCount % 2 == 0 ){
+    if( (array[i] === ' ' || array[i] === '\n' || array[i] === '\t') && quoteCount % 2 === 0 ){
       array.splice(i,1);
       i--;
     }
-    else if( array[i] == '"' && array[i-1] != '\\' ) quoteCount++;
+    else if( array[i] === '"' && array[i-1] != '\\' ) quoteCount++;
   }//end of for loop
   data = array.join("");
   return data;
@@ -116,15 +116,15 @@ function eliminatingSpace( data ){
 //Factory parser function
 function  parsingLegend( data ){
   data = eliminatingSpace(data.trim()); let result;
-  if( data[0] == 'n' )
+  if( data[0] === 'n' )
     if( (result = nullParser(data)) != null ) return result;
-  if( data[0] == 't' || data[0] == 'f' )
+  if( data[0] === 't' || data[0] === 'f' )
     if( (result = booleanParser(data)) != null ) return result;
-  if( data[0] == '"' )
+  if( data[0] === '"' )
     if( (result = stringParser(data)) != null ) return result;
-  if( data[0] == '[' )
+  if( data[0] === '[' )
     if( (result =  arrayParser(data)) != null ) return result;
-  if( data[0] == '{' )
+  if( data[0] === '{' )
     if( (result = objectParser(data)) != null ) return result;
   if( (result = numberParser(data)) != null ) return result;
   return -1;
@@ -141,10 +141,10 @@ and
 specify the path of the file in the argument below
 */
 
-//const fs = require('fs')
-//let data = fs.readFileSync('   /*Your file path*/   ')
-//data = data.toString()
-//parsedResult = parsingLegend(data);
+const fs = require('fs')
+let data = fs.readFileSync('/home/vinayakrugvedi/Desktop/Geekskool-BootCamp/Parsers/twitterdata.json')
+data = data.toString()
+parsedResult = parsingLegend(data);
 
 console.log(parsedResult);
 
