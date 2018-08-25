@@ -141,10 +141,10 @@ and
 specify the path of the file in the argument below
 */
 
-const fs = require('fs')
-let data = fs.readFileSync('/home/vinayakrugvedi/Desktop/Geekskool-BootCamp/Parsers/twitterdata.json')
-data = data.toString()
-parsedResult = parsingLegend(data);
+//const fs = require('fs')
+//let data = fs.readFileSync('/home/vinayakrugvedi/Desktop/Geekskool-BootCamp/Parsers/twitterdata.json')
+//data = data.toString()
+//parsedResult = parsingLegend(data);
 
 console.log(parsedResult);
 
