@@ -118,15 +118,15 @@ function  parsingLegend( data ){
   data = eliminatingSpace(data.trim()); let result;
   if( data[0] === 'n' )
     if( (result = nullParser(data)) != null ) return result;
-  if( data[0] === 't' || data[0] === 'f' )
+  elseif( data[0] === 't' || data[0] === 'f' )
     if( (result = booleanParser(data)) != null ) return result;
-  if( data[0] === '"' )
+  elseif( data[0] === '"' )
     if( (result = stringParser(data)) != null ) return result;
-  if( data[0] === '[' )
+  elseif( data[0] === '[' )
     if( (result =  arrayParser(data)) != null ) return result;
-  if( data[0] === '{' )
+  elseif( data[0] === '{' )
     if( (result = objectParser(data)) != null ) return result;
-  if( (result = numberParser(data)) != null ) return result;
+  elseif( (result = numberParser(data)) != null ) return result;
   return -1;
 }
 
