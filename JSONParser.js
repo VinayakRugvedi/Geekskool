@@ -116,24 +116,29 @@ function eliminatingSpace( data ){
 //Factory parser function
 function  parsingLegend( data ){
   data = eliminatingSpace(data.trim()); let result;
-  if( data[0] === 'n' )
+  if( data[0] === 'n' ){
     if( (result = nullParser(data)) != null ) return result;
-  elseif( data[0] === 't' || data[0] === 'f' )
+  }
+  else if( data[0] === 't' || data[0] === 'f' ){
     if( (result = booleanParser(data)) != null ) return result;
-  elseif( data[0] === '"' )
+  }
+  else if( data[0] === '"' ){
     if( (result = stringParser(data)) != null ) return result;
-  elseif( data[0] === '[' )
+  }
+  else if( data[0] === '[' ){
     if( (result =  arrayParser(data)) != null ) return result;
-  elseif( data[0] === '{' )
+  }
+  else if( data[0] === '{' ){
     if( (result = objectParser(data)) != null ) return result;
-  elseif( (result = numberParser(data)) != null ) return result;
+  }
+  else if( (result = numberParser(data)) != null ) return result;
   return -1;
 }
 
 //**********DO NOT DISTURB THE ABOVE CODE**********//
 //Replace /*Your Input JSON*/ with your input - Happy Parsing ;-)
 let parsedResult;
-parsedResult = parsingLegend('   /*Your Input JSON*/    ');
+//parsedResult = parsingLegend('   "He\\\nllo"   ');
 
 /*
 Or if you have a file to be parsed, uncomment the following lines
@@ -143,6 +148,7 @@ specify the path of the file in the argument below
 
 //const fs = require('fs')
 //let data = fs.readFileSync('/home/vinayakrugvedi/Desktop/Geekskool-BootCamp/Parsers/twitterdata.json')
+//let data = fs.readFileSync('test.txt')
 //data = data.toString()
 //parsedResult = parsingLegend(data);
 
