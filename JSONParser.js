@@ -138,7 +138,7 @@ function  parsingLegend( data ){
 //**********DO NOT DISTURB THE ABOVE CODE**********//
 //Replace /*Your Input JSON*/ with your input - Happy Parsing ;-)
 let parsedResult;
-//parsedResult = parsingLegend('   "He\\\nllo"   ');
+//parsedResult = parsingLegend('   /*Your Input JSON*/   ');
 
 /*
 Or if you have a file to be parsed, uncomment the following lines
